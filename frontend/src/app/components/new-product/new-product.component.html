@@ -1,0 +1,35 @@
+<div class="relative-parent">
+    <h2 mat-dialog-title>Product Item</h2>
+    <span class="close-span" (click)="onClose()">x</span>
+</div>
+
+<mat-dialog-content>
+    <form #newProductForm="ngForm" [formGroup]="productForm" (ngSubmit)="onSubmit(newProductForm.value)"
+        ngNativeValidate>
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input formControlName="title" matInput required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Price [$]</mat-label>
+            <input formControlName="price" matInput required type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select formControlName="categories" multiple required>
+                <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput required></textarea>
+        </mat-form-field>
+        <button type="submit" class="mat-raised-button mat-primary">Save</button>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+</mat-dialog-actions>

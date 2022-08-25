@@ -1,0 +1,162 @@
+{
+  "products": [
+    {
+      "title": "Book",
+      "price": 10,
+      "categories": [
+        "Entertainment",
+        "Education"
+      ],
+      "description": "To read",
+      "id": 1
+    },
+    {
+      "title": "Ball",
+      "price": 15,
+      "categories": [
+        "Sport"
+      ],
+      "description": "Football ball\n",
+      "id": 2
+    },
+    {
+      "title": "PC",
+      "price": 1500,
+      "categories": [
+        "Entertainment",
+        "Education",
+        "IT"
+      ],
+      "description": "Very nice machine",
+      "id": 3
+    },
+    {
+      "title": "Calculator",
+      "price": 5,
+      "categories": [
+        "Math"
+      ],
+      "description": "Very good in calculations",
+      "id": 4
+    },
+    {
+      "title": "Keyboard",
+      "price": 100,
+      "categories": [
+        "IT"
+      ],
+      "description": "Black",
+      "id": 5
+    },
+    {
+      "title": "Painting",
+      "price": 250,
+      "categories": [
+        "Art"
+      ],
+      "description": "Leonardo da Vinci",
+      "id": 6
+    }
+  ],
+  "cart": [],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Entertainment"
+    },
+    {
+      "id": 2,
+      "name": "Education"
+    },
+    {
+      "id": 3,
+      "name": "Sport"
+    },
+    {
+      "name": "Math",
+      "id": 4
+    },
+    {
+      "name": "IT",
+      "id": 5
+    },
+    {
+      "name": "Art",
+      "id": 6
+    },
+    {
+      "name": "Music",
+      "id": 7
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "password": "admin"
+    },
+    {
+      "id": 2,
+      "login": "customer",
+      "password": "customer"
+    },
+    {
+      "login": "customer1",
+      "password": "12345",
+      "id": 3
+    },
+    {
+      "login": "customer2",
+      "password": "123",
+      "id": 4
+    }
+  ],
+  "history": [
+    {
+      "userId": 2,
+      "date": "2022-07-26T11:40:02.544Z",
+      "order": [
+        {
+          "title": "Ball",
+          "amount": 3,
+          "priceOfProduct": 15
+        },
+        {
+          "title": "PC",
+          "amount": 2,
+          "priceOfProduct": 1500
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "date": "2022-07-26T13:15:04.853Z",
+      "order": [
+        {
+          "title": "Calculator",
+          "amount": 10,
+          "priceOfProduct": 5
+        },
+        {
+          "title": "Painting",
+          "amount": 1,
+          "priceOfProduct": 250
+        }
+      ],
+      "id": 4
+    },
+    {
+      "userId": 2,
+      "date": "2022-07-26T13:54:04.048Z",
+      "order": [
+        {
+          "title": "Ball",
+          "amount": 1,
+          "priceOfProduct": 15
+        }
+      ],
+      "id": 5
+    }
+  ]
+}

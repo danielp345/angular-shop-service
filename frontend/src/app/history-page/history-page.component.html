@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+
+        <h1 class="title">History</h1>
+
+        <mat-form-field *ngIf="isAdmin()" appearance="fill" class="categories">
+            <mat-label>User</mat-label>
+            <mat-select [formControl]="usersForm" (selectionChange)="onCategoryChange()">
+                <mat-option>--NO-FILTER--</mat-option>
+                <mat-option *ngFor="let user of users" [value]="user.id">
+                    {{user.login}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <table class="relative-parent">
+        <div *ngIf="isLoading" class="spinner-box">
+            <mat-spinner></mat-spinner>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th *ngIf="isAdmin()" scope="col">User</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total price</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="historyItems">
+            <tr *ngFor="let historyItem of filteredItems; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td *ngIf="isAdmin()">{{getUserLogin(historyItem.userId)}}</td>
+                <td>{{getDate(historyItem.date)}}</td>
+                <td>{{getTotalPrice(historyItem) | currency}}</td>
+                <button mat-stroked-button color="primary" class="details-btn"
+                    (click)="openHistoryItemDialog(historyItem)">
+                    Show details
+                </button>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,15 @@
+<div class="relative-parent">
+    <span class="close-span" (click)="onClose()">x</span>
+    <h3>Order Details</h3>
+    <ul>
+        <li>Date: {{data.historyItem.date}}</li>
+        <li>Total price: <strong>{{data.totalPrice | currency}}</strong></li>
+        <li>Products :
+            <ul>
+                <li *ngFor="let product of data.historyItem.order">
+                    {{product.title}}: {{product.amount}} x {{product.priceOfProduct | currency}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

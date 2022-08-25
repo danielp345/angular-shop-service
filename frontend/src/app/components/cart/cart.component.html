@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="row">
+        <h1 class="title">{{isAdmin() ? 'Shopping carts of all users' : 'Your shopping cart'}}</h1>
+        <div class="btns">
+            <button mat-raised-button color="primary" [disabled]="cartProducts.length===0"
+                (click)="openDialog()">Buy</button>
+            <button mat-stroked-button color="primary" [disabled]="cartProducts.length===0"
+                (click)="onDeleteAll()">Clear cart</button>
+        </div>
+    </div>
+    <table class="relative-parent">
+        <div *ngIf="isLoading" class="spinner-box">
+            <mat-spinner></mat-spinner>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="!isAdmin()">
+            <tr *ngFor="let product of cartProducts; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{product.title}}</td>
+                <td>{{product.amount}}</td>
+                <td>{{product.priceOfProduct * product.amount| currency}}</td>
+                <button mat-icon-button color="warn" class="delete-btn" (click)="onDelete($event, product)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="cartProducts.length === 0 && !isAdmin()" class="warning">
+        <mat-icon class="scale-icon">report</mat-icon>
+        <p>There are no products yet</p>
+    </div>
+
+    <div *ngIf="isAdmin()" class="warning">
+        <mat-icon class="scale-icon">report</mat-icon>
+        <p>As admin you can't make purchases</p>
+    </div>
+
+</div>

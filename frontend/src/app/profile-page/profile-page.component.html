@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Hi {{user.login}}</h2>
+
+    <button mat-raised-button color="primary" (click)="onNavigate('/history/' + id)">
+        <span>History of orders</span>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="openChangePasswordDialog(user)">
+        <span>Change password</span>
+    </button>
+</div>

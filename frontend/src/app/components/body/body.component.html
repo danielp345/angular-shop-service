@@ -1,0 +1,47 @@
+<div class="container">
+
+    <div class="row">
+        <h1 class="title">Products</h1>
+        <div class="actions">
+            <mat-form-field appearance="fill" class="categories">
+                <mat-label>Category</mat-label>
+                <mat-select [formControl]="categoriesForm" (selectionChange)="onCategoryChange()">
+                    <mat-option>--NO-FILTER--</mat-option>
+                    <mat-option *ngFor="let category of categories" [value]="category.name">
+                        {{category.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="isAdmin()" class="admin-btns">
+                <button mat-stroked-button color="primary" (click)="openNewProductDialog()">Add new product</button>
+                <button mat-stroked-button color="primary" (click)="openNewCategoryDialog()">Add new category</button>
+            </div>
+        </div>
+    </div>
+    <table class="relative-parent">
+        <div *ngIf="isLoading" class="spinner-box">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </div>
+
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="products">
+            <tr *ngFor="let product of filteredProducts; index as i" (click)="openDialog(product)">
+                <th scope="row">{{i+1}}</th>
+                <td>{{product.title}}</td>
+                <td>{{product.price | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="products.length === 0" class="warning">
+        <mat-icon class="scale-icon">report</mat-icon>
+        <p>There are no products yet</p>
+    </div>
+</div>

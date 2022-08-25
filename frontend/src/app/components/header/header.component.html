@@ -1,0 +1,41 @@
+<p>
+    <mat-toolbar color="primary">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onNavigate('/')">
+                <mat-icon>shop</mat-icon>
+                <span>Products</span>
+            </button>
+            <button mat-menu-item (click)="idNavigate('cart')">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>Shopping Cart</span>
+            </button>
+        </mat-menu>
+
+        <span class="title-btn" (click)="onNavigate('/')">My Shop</span>
+        <button mat-raised-button color="basic" class="login-admin" (click)="onNavigate('/login')"
+            [disabled]="isUser()">
+            {{isUser() ? isUser() : 'Sign in'}}
+        </button>
+        <button *ngIf="!isUser()" mat-raised-button color="basic" class="login-admin" (click)="onNavigate('/register')">
+            Sign up
+        </button>
+        <button *ngIf="isUser()" mat-raised-button color="basic" class="login-admin" (click)="onLogout()">Log
+            out</button>
+        <span class="example-spacer"></span>
+
+        <button *ngIf="isUser()" mat-icon-button (click)="idNavigate('profile')">
+            <mat-icon>person</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="idNavigate('cart')">
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+
+        <button mat-icon-button>
+            <mat-icon>info</mat-icon>
+        </button>
+    </mat-toolbar>
+</p>

@@ -1,0 +1,54 @@
+<div class="relative-parent">
+    <h2 mat-dialog-title>Product Item</h2>
+    <span class="close-span" (click)="onClose()">x</span>
+</div>
+
+<mat-dialog-content>
+    <form [formGroup]="productForm" ngNativeValidate>
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input formControlName="title" matInput [readonly]="!isEditing" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Price [$]</mat-label>
+            <input formControlName="price" matInput [readonly]="!isEditing" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select formControlName="categories" multiple [disabled]="!isEditing" required>
+                <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput [readonly]="!isEditing" required></textarea>
+        </mat-form-field>
+
+    </form>
+    <div class="buttons" *ngIf="isAdmin()">
+
+        <button *ngIf="!isEditing" mat-flat-button color="primary" (click)="onEdit()">Edit</button>
+
+        <button *ngIf="isEditing" mat-flat-button color="primary" (click)="onSubmit()"
+            [disabled]="!productForm.valid">Save</button>
+
+        <button mat-stroked-button mat-dialog-close (click)="onRemove()">Remove</button>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!isAdmin()" class="customer-actions">
+    <mat-form-field appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" [formControl]="cartForm">
+        <mat-error *ngIf="cartForm.hasError('required')">
+            This field require <strong>number</strong>
+        </mat-error>
+        <mat-error *ngIf="cartForm.hasError('min') && !cartForm.hasError('required')">
+            Amount cannot be less than <strong>1</strong>
+        </mat-error>
+    </mat-form-field>
+    <button mat-dialog-close class="mat-raised-button mat-primary" [disabled]="!cartForm.valid" (click)="onAdd()">Add to
+        cart</button>
+</mat-dialog-actions>

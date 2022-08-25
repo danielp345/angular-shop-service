@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>{{isRegister ? 'Sign Up' : 'Sign In'}}</h1>
+    <form [formGroup]="loginForm" class="login-form" (submit)="onSubmit(isRegister)">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Login</mat-label>
+            <input formControlName="login" matInput required>
+            <mat-error *ngIf="loginForm.controls['login'].hasError('required')">
+                This field is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="password" required>
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                This field is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="isRegister" appearance="fill">
+            <mat-label>Confirm Your Password</mat-label>
+            <input formControlName="confirmPassword" matInput type="password" required>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="primary" class="login-admin">Submit</button>
+
+    </form>
+
+    <p class="navigate-p" (click)="togglePage()">{{isRegister ? 'Sign In' : 'Sign up'}} instead</p>
+</div>
