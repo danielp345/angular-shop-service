@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/products.service';
 import { ShopHelper } from 'src/app/shop.helper';
+import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-header',
@@ -15,14 +16,18 @@ export class HeaderComponent {
 
   isUser: () => boolean | string = ShopHelper.isUser;
 
-  constructor(private router: Router, public productService: ProductsService) {}
+  constructor(
+    private router: Router,
+    public productService: ProductsService,
+    private usersService: UsersService
+  ) {}
 
   onLogout() {
-    localStorage.removeItem('userLogin');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAdmin');
-    this.onNavigate('/');
+    this.usersService.logoutUser().subscribe({
+      next: (res) => {
+        this.onNavigate('/');
+      },
+    });
   }
 
   onNavigate(link: string) {

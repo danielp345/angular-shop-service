@@ -52,4 +52,12 @@ export class CartService {
       requestOptions
     );
   }
+
+  public deleteAllCartProducts(): Observable<CartProductWithId[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+    const requestOptions = { headers: headers };
+    return this.http.delete<CartProductWithId[]>(`${cartUrl}`, requestOptions);
+  }
 }

@@ -60,15 +60,14 @@ export class HistoryPageComponent implements OnInit {
         this.filteredItems = items;
       }
       this.isLoading = false;
+      2;
     });
   }
 
   fetchUserHistory() {
-    this.historyService.getHistory().subscribe((items) => {
-      this.historyItems = items.filter(
-        (item) => item.userId.toString() === this.userId
-      );
-      this.filteredItems = this.historyItems;
+    this.historyService.getUserHistory(this.userId).subscribe((items) => {
+      this.historyItems = items;
+      this.filteredItems = items;
       this.isLoading = false;
     });
   }
@@ -110,7 +109,7 @@ export class HistoryPageComponent implements OnInit {
     });
   }
 
-  getUserLogin(userId: number) {
-    return this.users.find((user) => user.id === userId)?.login;
+  getUserLogin(userId: string) {
+    return this.users.find((user) => user._id === userId)?.login;
   }
 }

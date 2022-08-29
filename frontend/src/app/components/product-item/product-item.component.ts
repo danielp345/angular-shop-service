@@ -53,6 +53,7 @@ export class ProductItemComponent implements OnInit {
       Validators.required,
       Validators.min(1),
     ]);
+    this.productForm.disable();
   }
 
   fetchCategories() {
@@ -65,6 +66,7 @@ export class ProductItemComponent implements OnInit {
 
   onEdit() {
     this.isEditing = true;
+    this.productForm.enable();
   }
 
   onSubmit() {
@@ -81,6 +83,7 @@ export class ProductItemComponent implements OnInit {
         },
         complete: () => {
           this.isEditing = false;
+          this.productForm.disable();
         },
       });
   }

@@ -51,10 +51,18 @@ export class ProductsService {
   }
 
   public addCategory(category: Category): Observable<Category> {
-    return this.http.post<any>(categoriesUrl, category);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+    const requestOptions = { headers: headers };
+    return this.http.post<Category>(categoriesUrl, category, requestOptions);
   }
 
-  public deleteCategory(id: string): Observable<any> {
-    return this.http.delete<any>(`${categoriesUrl}/${id}`);
+  public deleteCategory(id: string): Observable<Category> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+    const requestOptions = { headers: headers };
+    return this.http.delete<Category>(`${categoriesUrl}/${id}`, requestOptions);
   }
 }

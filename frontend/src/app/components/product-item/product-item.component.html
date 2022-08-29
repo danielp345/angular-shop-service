@@ -7,24 +7,24 @@
     <form [formGroup]="productForm" ngNativeValidate>
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
-            <input formControlName="title" matInput [readonly]="!isEditing" required>
+            <input formControlName="title" matInput required>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Price [$]</mat-label>
-            <input formControlName="price" matInput [readonly]="!isEditing" required>
+            <input formControlName="price" matInput required>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Categories</mat-label>
-            <mat-select formControlName="categories" multiple [disabled]="!isEditing" required>
+            <mat-select formControlName="categories" multiple required>
                 <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <textarea formControlName="description" matInput [readonly]="!isEditing" required></textarea>
+            <textarea formControlName="description" matInput required></textarea>
         </mat-form-field>
 
     </form>

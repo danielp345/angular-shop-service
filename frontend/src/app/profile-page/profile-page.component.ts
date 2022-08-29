@@ -16,7 +16,7 @@ export class ProfilePageComponent implements OnInit {
   id: string = '';
 
   user: UserWithId = {
-    id: 0,
+    _id: '',
     login: '',
     password: '',
   };
@@ -36,7 +36,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
-      this.getUser();
+      // this.getUser();
     });
     this.userForm = this.formBuilder.group({
       login: new FormControl(this.user.login),

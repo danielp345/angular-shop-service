@@ -1,25 +1,27 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const UserSchema = mongoose.Schema(
-  {
-    login: {
-      type: String,
-      required: [true, "Please enter a login"],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Please enter a password"],
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+	{
+		authId: {
+			type: String,
+			unique: [true, "User exists"],
+		},
+		login: {
+			type: String,
+			required: [true, "Please enter a login"],
+		},
+		password: {
+			type: String,
+		},
+		isAdmin: {
+			type: Boolean,
+			required: true,
+			default: false,
+		},
+	},
+	{
+		timestamps: true,
+	}
+)
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema)

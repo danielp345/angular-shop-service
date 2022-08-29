@@ -1,59 +1,84 @@
-const asyncHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler")
 
-const Category = require("../models/CategoryModel");
+const Category = require("../models/CategoryModel")
+const User = require("../models/UserModel")
 
 // @desc Get categories
 // @route GET /api/categories
 const getCategories = asyncHandler(async (req, res) => {
-  const categories = await Category.find({});
-  res.status(200).json(categories);
-});
+	const categories = await Category.find({})
+	res.status(200).json(categories)
+})
 
 // @desc Add category
 // @route POST /api/categories
 const addCategory = asyncHandler(async (req, res) => {
-  const { name } = req.body;
+	const user = await User.findById(req.user.id)
 
-  if (!name) {
-    res.status(400);
-    throw new Error("Please enter a category name");
-  }
+	if (!user) {
+		res.status(401)
+		throw new Error("User not found")
+	}
 
-  const categoryExists = await Category.findOne({ name });
+	if (!user.isAdmin) {
+		res.status(401)
+		throw new Error("You are not an admin")
+	}
 
-  if (categoryExists) {
-    res.status(400);
-    throw new Error("Category already exists");
-  }
+	const { name } = req.body
 
-  const category = await Category.create({
-    name,
-  });
+	if (!name) {
+		res.status(400)
+		throw new Error("Please enter a category name")
+	}
 
-  if (category) {
-    res.status(201).json({
-      name: category.name,
-    });
-  }
-});
+	const categoryExists = await Category.findOne({ name })
+
+	if (categoryExists) {
+		res.status(400)
+		throw new Error("Category already exists")
+	}
+
+	const category = await Category.create({
+		name,
+	})
+
+	if (category) {
+		res.status(201).json({
+			name: category.name,
+		})
+	}
+})
 
 // @desc Delete category
 // @route DELETE /api/categories
 const deleteCategory = asyncHandler(async (req, res) => {
-  const category = await Category.findById(req.params.id);
+	const user = await User.findById(req.user.id)
 
-  if (!category) {
-    res.status(404);
-    throw new Error("Category not found");
-  }
+	if (!user) {
+		res.status(401)
+		throw new Error("User not found")
+	}
 
-  await category.remove();
+	if (!user.isAdmin) {
+		res.status(401)
+		throw new Error("You are not an admin")
+	}
 
-  res.status(200).json({ success: true });
-});
+	const category = await Category.findById(req.params.id)
+
+	if (!category) {
+		res.status(404)
+		throw new Error("Category not found")
+	}
+
+	await category.remove()
+
+	res.status(200).json({ success: true })
+})
 
 module.exports = {
-  getCategories,
-  addCategory,
-  deleteCategory,
-};
+	getCategories,
+	addCategory,
+	deleteCategory,
+}

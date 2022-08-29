@@ -1,12 +1,12 @@
 export interface HistoryItem {
-  userId: number;
+  userId: string;
   date: Date;
   order: historyProduct[];
 }
 
 export interface HistoryItemWithId {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   date: Date;
   order: historyProduct[];
 }

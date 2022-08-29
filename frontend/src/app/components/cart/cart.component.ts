@@ -84,10 +84,14 @@ export class CartComponent implements OnInit {
       });
   }
   onDeleteAll() {
-    for (let product of this.cartProducts) {
-      this.cartService.deleteCartProduct(product._id).subscribe();
-    }
-    this.cartProducts = [];
+    this.cartService.deleteAllCartProducts().subscribe({
+      next: () => {
+        this.cartProducts = [];
+      },
+      error: (error) => {
+        alert(error.error.message);
+      },
+    });
   }
 
   onBuy() {
@@ -99,12 +103,17 @@ export class CartComponent implements OnInit {
       };
     });
     const newHistoryItem = {
-      userId: parseInt(this.userId),
+      userId: this.userId,
       date: new Date(Date.now()),
       order: orderProducts,
     };
-    this.historyService.addHistoryItem(newHistoryItem).subscribe(() => {
-      this.onDeleteAll();
+    this.historyService.addHistoryItem(newHistoryItem).subscribe({
+      next: () => {
+        this.onDeleteAll();
+      },
+      error: (error) => {
+        alert(error.error.message);
+      },
     });
   }
 }

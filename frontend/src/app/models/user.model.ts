@@ -4,7 +4,7 @@ export interface User {
 }
 
 export interface UserWithId {
-  id: number;
+  _id: string;
   login: string;
   password: string;
 }

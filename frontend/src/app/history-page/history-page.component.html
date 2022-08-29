@@ -7,7 +7,7 @@
             <mat-label>User</mat-label>
             <mat-select [formControl]="usersForm" (selectionChange)="onCategoryChange()">
                 <mat-option>--NO-FILTER--</mat-option>
-                <mat-option *ngFor="let user of users" [value]="user.id">
+                <mat-option *ngFor="let user of users" [value]="user._id">
                     {{user.login}}
                 </mat-option>
             </mat-select>
